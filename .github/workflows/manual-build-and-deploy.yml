@@ -1,10 +1,10 @@
-name: Manual Nuxt 3 SSG Build
+name: Manual Nuxt 3 SSG Build and Deploy
 
 on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,6 +23,13 @@ jobs:
         run: npm run generate
 
       - name: List Content of dist Folder
-        run: |
-          echo "Contents of dist folder:"
-          ls -R dist
+        run: ls -R dist
+
+      - name: Deploy to VPS via SSH
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: "dist/*"
+          target: "/home/projects/portfolio"
