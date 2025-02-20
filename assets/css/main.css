@@ -1,0 +1,88 @@
+/* FONTS imports */
+
+@import url(
+    'https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap'
+    );
+
+    @import url(
+        'https://fonts.googleapis.com/css2?family=Unica+One&display=swap');
+/* END FONTS imports */
+
+:root {
+    --primery-dark-gray: #222222;
+    --darker-light-gray: #989896;
+    --light-gray: #ADADAD;
+    --white-gray: #FEFEFE;
+    --light-gray-border: #474747;
+    --light-gray-text-color: #BFBEB9;
+    --global-padding: 0 10% 0 10%;
+    
+    --nav-links-text-color: #B3B1AE;
+
+    --description-light-gray-color: #8D8C8E;
+    --description-dark-title: #363536;
+
+    --footer-background-color: #252525;
+    --footer-text-color: #BDBCBA;
+}
+
+/* GLOBAL STYLE */
+* {
+    margin: 0px;
+    padding: 0px;
+    /* DEFAULT FONT */
+    font-family: "Courier Prime", serif;
+    font-weight: 400;
+}
+
+p, a { 
+  font-style: normal;
+  font-size: 1rem;
+}
+
+
+.display-grid {
+    display: grid;
+}
+
+.generic-section {
+    padding-top: 50px;
+    display: grid;
+    place-items: center;
+}
+
+/* END GLOBAL STYLE */
+
+/* FONT classes */
+.courier-prime-regular {
+    font-family: "Courier Prime", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .courier-prime-bold {
+    font-family: "Courier Prime", serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  .courier-prime-regular-italic {
+    font-family: "Courier Prime", serif;
+    font-weight: 400;
+    font-style: italic;
+  }
+  
+  .courier-prime-bold-italic {
+    font-family: "Courier Prime", serif;
+    font-weight: 700;
+    font-style: italic;
+  }
+
+  .unica-one-regular {
+    font-family: "Unica One", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+
+  /* END FONT classes */
