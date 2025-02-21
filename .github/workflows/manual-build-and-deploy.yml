@@ -26,18 +26,26 @@ jobs:
         run: ls -R dist
 
       - name: Clean Old Files on VPS (Optional)
-        run: |
-          ssh -i ${{ secrets.VPS_SSH_KEY }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} 'rm -rf /home/projects/portfolio/*'
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          script: 'rm -rf /home/projects/portfolio/*'
 
       - name: Deploy to VPS via SCP
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
+          password: ${{ secrets.VPS_PASSWORD }}
           source: "dist/*"
           target: "/home/projects/portfolio"
 
       # - name: Restart NGINX (Optional)
-      #   run: |
-      #     ssh -i ${{ secrets.VPS_SSH_KEY }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} 'sudo systemctl reload nginx'
+      #   uses: appleboy/ssh-action@v0.1.7
+      #   with:
+      #     host: ${{ secrets.VPS_HOST }}
+      #     username: ${{ secrets.VPS_USER }}
+      #     password: ${{ secrets.VPS_PASSWORD }}
+      #     script: 'sudo systemctl reload nginx'
