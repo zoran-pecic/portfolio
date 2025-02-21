@@ -22,8 +22,8 @@ jobs:
       - name: Generate Static Pages (SSG)
         run: npm run generate
 
-      - name: List Content of dist Folder
-        run: ls -R dist
+      # - name: List Content of dist Folder
+      #   run: ls -R dist
 
       - name: Clean Old Files on VPS (Optional)
         uses: appleboy/ssh-action@v0.1.7
@@ -32,7 +32,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.VPS_PASSWORD }}
           script: 'rm -rf /home/projects/portfolio/*'
-
+      
       - name: Deploy to VPS via SCP
         uses: appleboy/scp-action@v0.1.7
         with:
