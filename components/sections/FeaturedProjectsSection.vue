@@ -6,8 +6,8 @@
                 alt="custom-photo" />
         </template>
 
-        <template v-slot:half2 class="content">
-            <div>
+        <template v-slot:half2>
+            <div class="content">
 
                 <h2 class="unica-one-regular title">
                     My Featured Projects
@@ -37,6 +37,10 @@
 
 .wapper-space {
     padding: 50px 0 80px 0;
+}
+
+.content {
+    padding-right: 20%;
 }
 
 .title { 

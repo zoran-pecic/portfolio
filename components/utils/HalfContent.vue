@@ -31,6 +31,7 @@
     justify-items: center;
     align-items: center;
     height: 100%;
+    align-content: center;
 }
 
 
