@@ -1,7 +1,7 @@
 <template>
     <section class="intro-section generic-section">
         <img class="hero-image"
-         src="/images/kujzo.png" 
+         src="/images/kujzo.webp" 
          alt="kujzo-programmer-photo">
 
          <p class="description">Programmer Portfolio</p>
