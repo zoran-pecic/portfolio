@@ -1,22 +1,23 @@
 <template>
-    <footer>
+    <footer id="contact">
 
-        <pre class="rights-style">
-            © 2025 Zoran Pecić
-            All rights reserved.
-        </pre>
-
+        <div class="rights-style">
+            <p>&copy; {{ currentYear }} Zoran Pecic</p>
+            <p>All rights reserved.</p>
+        </div>
 
         <span>
             <h4>Connect With Me</h4>
 
             <ul class="list-style">
                 <li v-for="linkItem in accountsList" class="link-nav-element">
-                    <a :href="linkItem.link" class="link-nav">
+                    <a :href="linkItem.link"
+                       class="link-nav"
+                       target="_blank"
+                       rel="noopener noreferrer">
                         {{ linkItem.text }}
                     </a>
                 </li>
-                
             </ul>
 
         </span>
@@ -26,10 +27,12 @@
 
 <script setup lang="ts">
 
+const currentYear = new Date().getFullYear();
+
 const accountsList = [
-    { text: "LinkedIn", link: "#"},
-    { text: "GitHub", link: "#"},
-    { text: "Email", link: "#"},
+    { text: "LinkedIn", link: "https://www.linkedin.com/in/zoran-pecic-131244155/"},
+    { text: "GitHub", link: "https://github.com/zoran-pecic"},
+    { text: "Email", link: "mailto:zoran@pecic.dev"},
 ]
 
 </script>
@@ -48,12 +51,12 @@ footer {
 .rights-style {
     font-size: 0.8rem;
     align-self: end;
-    white-space: pre-line;
+    line-height: 1.6;
 }
 
-.list-style { 
+.list-style {
     margin-top: 10px;
-    list-style-type: none; 
+    list-style-type: none;
 }
 
 .link-nav-element {
@@ -61,10 +64,14 @@ footer {
 }
 
 .link-nav {
-    text-decoration: none; 
+    text-decoration: none;
     color: var(--nav-links-text-color);
     font-size: 0.8rem;
-    
+    transition: color 0.2s ease;
+}
+
+.link-nav:hover {
+    color: var(--white-gray);
 }
 
 </style>

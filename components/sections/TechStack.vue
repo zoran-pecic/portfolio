@@ -1,50 +1,71 @@
 
 <template>
-    <section>
-        <TechStackItem
-            :tech-name="techItem.text"
-            :image-source="techItem.source"
-            :image-alt="techItem.alt"
-            v-for="techItem in techItems"
-        />
+    <section class="tech-section">
+        <h2 class="section-title unica-one-regular animate-on-scroll">Tech Stack</h2>
+
+        <div class="tech-grid stagger-children">
+            <TechStackItem
+                :tech-name="techItem.text"
+                :image-source="techItem.source"
+                :image-alt="techItem.alt"
+                v-for="techItem in techItems"
+                :key="techItem.text"
+            />
+        </div>
     </section>
 </template>
 
 <script setup lang="ts">
 
 const techItems = [
-    { source: "/images/tech/python.png", alt: "python-photo", text: "Python" },
-    { source: "/images/tech/fastapi.png", alt: "fast-api-photo", text: "FastAPI" },
-    { source: "/images/tech/dj.png", alt: "dj-photo", text: "Django" },
-    { source: "/images/tech/js.png", alt: "js-photo", text: "JavaScript" },
-    { source: "/images/tech/ts.png", alt: "ts-photo", text: "TypeScript" },
-    { source: "/images/tech/vue.png", alt: "vue-photo", text: "VueJs" },
-    { source: "/images/tech/nuxt.png", alt: "nuxt-photo", text: "NuxtJs" },
-    { source: "/images/tech/angular.png", alt: "angular-photo", text: "Angular 2+" },
+    { source: "/images/tech/python.svg", alt: "python-logo", text: "Python" },
+    { source: "/images/tech/django.svg", alt: "django-logo", text: "Django" },
+    { source: "/images/tech/fastapi.svg", alt: "fastapi-logo", text: "FastAPI" },
+    { source: "/images/tech/javascript.svg", alt: "javascript-logo", text: "JavaScript" },
+    { source: "/images/tech/typescript.svg", alt: "typescript-logo", text: "TypeScript" },
+    { source: "/images/tech/vuejs.svg", alt: "vue-logo", text: "Vue.js" },
+    { source: "/images/tech/nuxtjs.svg", alt: "nuxt-logo", text: "Nuxt.js" },
+    { source: "/images/tech/angular.svg", alt: "angular-logo", text: "Angular" },
+    { source: "/images/tech/postgresql.svg", alt: "postgresql-logo", text: "PostgreSQL" },
+    { source: "/images/tech/redis.svg", alt: "redis-logo", text: "Redis" },
+    { source: "/images/tech/docker.svg", alt: "docker-logo", text: "Docker" },
+    { source: "/images/tech/celery.png", alt: "celery-logo", text: "Celery" },
+    { source: "/images/tech/aws-lambda.svg", alt: "lambda-logo", text: "Lambda" },
+    { source: "/images/tech/dynamodb.svg", alt: "dynamodb-logo", text: "DynamoDB" },
+    { source: "/images/tech/opensearch.png", alt: "opensearch-logo", text: "OpenSearch" },
 ]
 
 </script>
 
 <style scoped>
 
-
-section {
+.tech-section {
     min-height: 200px;
     background-color: var(--darker-light-gray);
     display: grid;
-    grid-template-rows: 1fr;
-    grid-template-columns: repeat(8, 80px);
-    grid-gap: 50px;
     place-items: center;
-    padding: 0px 10% 0px 10%;
-    justify-content: center;
+    padding: 40px 10%;
 }
 
-@media only screen and (max-width: 1070px){
-    section {
-        padding: 30px 0 30px 0;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: repeat(4, 80px);
+.section-title {
+    font-size: 1.3rem;
+    color: var(--primary-dark-gray);
+    margin-bottom: 30px;
+}
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 30px;
+    max-width: 900px;
+    width: 100%;
+    place-items: center;
+}
+
+@media only screen and (max-width: 600px){
+    .tech-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
     }
 }
 
