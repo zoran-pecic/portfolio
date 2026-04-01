@@ -3,11 +3,12 @@
         <h2 class="section-title unica-one-regular">Experience</h2>
         <div class="divider"></div>
 
-        <div class="timeline stagger-fade">
+        <div class="timeline stagger-fade" aria-label="Career timeline" role="list">
             <div
                 v-for="(item, index) in timeline"
                 :key="index"
                 class="timeline-entry"
+                role="listitem"
                 :class="{ 'is-highlight': item.highlight, 'is-education': item.isEducation }"
             >
                 <div class="timeline-dot" :class="{ 'dot-active': item.highlight }"></div>
