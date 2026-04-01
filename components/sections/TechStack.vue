@@ -1,9 +1,9 @@
 
 <template>
-    <section class="tech-section">
+    <section id="tech-stack" class="tech-section">
         <h2 class="section-title unica-one-regular animate-on-scroll">Tech Stack</h2>
 
-        <div class="tech-grid stagger-children">
+        <div class="tech-grid stagger-children" role="list" aria-label="Technologies">
             <TechStackItem
                 :tech-name="techItem.text"
                 :image-source="techItem.source"

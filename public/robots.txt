@@ -1,1 +1,4 @@
+User-agent: *
+Allow: /
 
+Sitemap: https://zoran.pecic.dev/sitemap.xml

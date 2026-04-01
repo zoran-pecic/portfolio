@@ -1,5 +1,5 @@
 <template>
-    <div class="tech-item">
+    <div class="tech-item" role="listitem">
         <img class="tech-image"
             :src="imageSource"
             :alt="imageAlt" />

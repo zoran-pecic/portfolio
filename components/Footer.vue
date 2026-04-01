@@ -6,21 +6,22 @@
             <p>All rights reserved.</p>
         </div>
 
-        <span>
-            <h4>Connect With Me</h4>
+        <div>
+            <h3>Connect With Me</h3>
 
-            <ul class="list-style">
-                <li v-for="linkItem in accountsList" class="link-nav-element">
+            <ul class="list-style" aria-label="Social links">
+                <li v-for="linkItem in accountsList" :key="linkItem.text" class="link-nav-element">
                     <a :href="linkItem.link"
                        class="link-nav"
                        target="_blank"
-                       rel="noopener noreferrer">
+                       rel="noopener noreferrer"
+                       :aria-label="`${linkItem.text} (opens in new tab)`">
                         {{ linkItem.text }}
                     </a>
                 </li>
             </ul>
 
-        </span>
+        </div>
 
     </footer>
 </template>
