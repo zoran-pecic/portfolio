@@ -12,5 +12,7 @@ const { displayText, customClass } = defineProps<ButtonProps>();
 </script>
 
 <style scoped>
-
-</style>~/types/Button
+button {
+    cursor: pointer;
+}
+</style>
