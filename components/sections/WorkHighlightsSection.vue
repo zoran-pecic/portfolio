@@ -22,7 +22,7 @@
 <script setup lang="ts">
 const projects = [
     {
-        title: 'Green Energy Marketplace',
+        title: 'EnergySage',
         company: 'EnergySage / Schneider Electric',
         description: 'Marketplace for solar panels, inverters, batteries and EV chargers. Decoupling the monolith into services: equipment, quoting, messaging, campaigns, onboarding.',
         tags: ['Django', 'FastAPI', 'Vue', 'Nuxt', 'AWS'],
@@ -38,6 +38,12 @@ const projects = [
         company: 'Mindnow / Holycode',
         description: 'E-commerce platform for meat products in Germany, with complex data integrations.',
         tags: ['Django', 'Celery', 'Integrations'],
+    },
+    {
+        title: 'Clanq',
+        company: 'Mindnow / Holycode',
+        description: 'Coupon and cashback platform with a mobile app — paybacks from purchases at partner stores go into savings funds for the users\' kids.',
+        tags: ['FastAPI', 'Cloud Functions', 'Mobile'],
     },
     {
         title: 'Thömus — Bikes of Switzerland',

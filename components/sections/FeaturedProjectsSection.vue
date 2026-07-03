@@ -86,7 +86,7 @@
 .project-link {
     overflow-wrap: break-word;
     white-space: pre-wrap;
-    color: var(--description-light-gray-color);
+    color: var(--accent-dark);
     outline: none;
     font-size: 14px;
     font-weight: 400;

@@ -33,7 +33,7 @@ onUnmounted(() => {
     left: 0;
     right: 0;
     height: 2px;
-    background-color: var(--light-gray);
+    background-color: var(--accent);
     transform-origin: 0 0;
     transform: scaleX(0);
     z-index: 999; /* below the mobile menu overlay (1000) */

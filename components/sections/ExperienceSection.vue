@@ -108,7 +108,7 @@ const timeline: Experience[] = [
 }
 
 .dot-active {
-    background-color: var(--white-gray);
+    background-color: var(--accent);
     animation: pulse 2s infinite;
 }
 
