@@ -116,7 +116,7 @@ const skills = [
 }
 
 .prompt {
-    color: var(--darker-light-gray);
+    color: var(--accent);
     margin-right: 8px;
     font-weight: 700;
 }
@@ -131,7 +131,7 @@ const skills = [
 
 .terminal-caret::after {
     content: '_';
-    color: var(--white-gray);
+    color: var(--accent);
     animation: caretBlink 1s steps(1) infinite;
 }
 

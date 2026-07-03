@@ -69,6 +69,7 @@ onUnmounted(() => {
 
 .typing-caret::after {
     content: '_';
+    color: var(--accent);
     animation: caretBlink 1s steps(1) infinite;
 }
 

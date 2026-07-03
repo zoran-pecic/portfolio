@@ -33,7 +33,10 @@ const { techName, imageSource, imageAlt } = defineProps<TechItemProps>();
     width: 60px;
     height: 60px;
     object-fit: contain;
-    filter: grayscale(1) brightness(0.8);
+    padding: 12px;
+    border-radius: 12px;
+    background-color: var(--white-gray); /* white tile so grayscale icons don't sink into the gray section */
+    filter: grayscale(1);
     transition: filter 0.3s ease;
 }
 
