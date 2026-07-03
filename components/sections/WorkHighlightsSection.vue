@@ -40,6 +40,12 @@ const projects = [
         tags: ['Django', 'Celery', 'Integrations'],
     },
     {
+        title: 'Clanq',
+        company: 'Mindnow / Holycode',
+        description: 'Coupon and cashback platform with a mobile app — paybacks from purchases at partner stores go into savings funds for the users\' kids.',
+        tags: ['FastAPI', 'Cloud Functions', 'Mobile'],
+    },
+    {
         title: 'Thömus — Bikes of Switzerland',
         company: 'Mindnow / Holycode',
         description: 'Online bike configurator for the Swiss manufacturer, with payment integrations including Mollie and PayPal.',
