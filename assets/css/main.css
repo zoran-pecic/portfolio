@@ -240,6 +240,9 @@ p, a {
                 transform var(--animation-duration-normal) var(--animation-easing);
 }
 
+/* Fallback for children beyond the staggered five, so long lists still reveal */
+.stagger-fade.is-visible > * { opacity: 1; transform: translateY(0); transition-delay: 750ms; }
+
 .stagger-fade.is-visible > *:nth-child(1)  { opacity: 1; transform: translateY(0); transition-delay: 0ms; }
 .stagger-fade.is-visible > *:nth-child(2)  { opacity: 1; transform: translateY(0); transition-delay: 150ms; }
 .stagger-fade.is-visible > *:nth-child(3)  { opacity: 1; transform: translateY(0); transition-delay: 300ms; }
