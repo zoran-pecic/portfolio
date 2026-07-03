@@ -4,12 +4,15 @@
     <main id="main-content">
         <IntroSection/>
         <AboutSection/>
+        <WhatIDoSection/>
         <ExperienceSection/>
         <FeaturedProjectsSection/>
+        <WorkHighlightsSection/>
         <TechStack/>
     </main>
     <Footer/>
     <ScrollToTop/>
+    <ScrollProgress/>
 </template>
 
 <script setup lang="ts">

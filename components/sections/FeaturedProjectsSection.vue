@@ -32,7 +32,7 @@
                 <a href="https://qr-code.pecic.dev/"
                    target="_blank"
                    rel="noopener noreferrer"
-                   class="project-link"
+                   class="project-link link-underline"
                    aria-label="View QR Code Generator project (opens in new tab)">View Project</a>
 
             </div>
@@ -86,7 +86,7 @@
 .project-link {
     overflow-wrap: break-word;
     white-space: pre-wrap;
-    color: var(--description-light-gray-color);
+    color: var(--accent-dark);
     outline: none;
     font-size: 14px;
     font-weight: 400;

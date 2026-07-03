@@ -167,7 +167,7 @@ onUnmounted(() => {
 }
 
 .rounded-button:hover {
-    border-color: var(--white-gray);
+    border-color: var(--accent);
     color: var(--white-gray);
 }
 

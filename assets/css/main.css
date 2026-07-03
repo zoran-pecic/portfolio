@@ -25,6 +25,10 @@
     --footer-background-color: #252525;
     --footer-text-color: #BDBCBA;
 
+    /* Single accent: terminal green. --accent on dark sections, --accent-dark passes AA on white. */
+    --accent: #6BC46D;
+    --accent-dark: #3E7D40;
+
     --animation-duration-fast: 0.3s;
     --animation-duration-normal: 0.6s;
     --animation-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -33,6 +37,10 @@
 /* GLOBAL STYLE */
 html {
     scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden; /* slide-from-left/right elements sit off-axis until revealed */
 }
 
 * {
@@ -151,12 +159,17 @@ p, a {
     }
 }
 
+@keyframes caretBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
 @keyframes pulse {
     0%, 100% {
-        box-shadow: 0 0 0 0 rgba(254, 254, 254, 0.4);
+        box-shadow: 0 0 0 0 rgba(107, 196, 109, 0.5);
     }
     50% {
-        box-shadow: 0 0 0 8px rgba(254, 254, 254, 0);
+        box-shadow: 0 0 0 8px rgba(107, 196, 109, 0);
     }
 }
 
@@ -232,5 +245,43 @@ p, a {
 .stagger-fade.is-visible > *:nth-child(3)  { opacity: 1; transform: translateY(0); transition-delay: 300ms; }
 .stagger-fade.is-visible > *:nth-child(4)  { opacity: 1; transform: translateY(0); transition-delay: 450ms; }
 .stagger-fade.is-visible > *:nth-child(5)  { opacity: 1; transform: translateY(0); transition-delay: 600ms; }
+
+/* Animated underline for text links */
+.link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size var(--animation-duration-fast) var(--animation-easing);
+}
+
+.link-underline:hover,
+.link-underline:focus-visible {
+    background-size: 100% 1px;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .animate-on-scroll,
+    .slide-from-left,
+    .slide-from-right,
+    .stagger-fade > *,
+    .stagger-children > * {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
 
 /* END ANIMATION */

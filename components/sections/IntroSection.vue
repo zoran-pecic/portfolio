@@ -4,7 +4,7 @@
          src="/images/kujzo.webp"
          alt="Zoran Pecic photo">
 
-         <p class="subtitle animate-hero-2">Team Lead & Full-Stack Engineer</p>
+         <p class="subtitle animate-hero-2">{{ typedSubtitle }}<span class="typing-caret" aria-hidden="true"></span></p>
 
          <h1 class="title unica-one-regular animate-hero-3">Zoran Pecic</h1>
         <p class="description animate-hero-4">
@@ -16,7 +16,29 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue';
+
 const yearsOfExperience = useYearsOfExperience();
+
+// Typewriter effect: SSR renders the full text (SEO / no-JS), typing starts on mount
+const fullSubtitle = 'Team Lead & Full-Stack Engineer';
+const typedSubtitle = ref(fullSubtitle);
+let typingTimer: ReturnType<typeof setInterval> | null = null;
+
+onMounted(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    typedSubtitle.value = '';
+    let i = 0;
+    typingTimer = setInterval(() => {
+        typedSubtitle.value = fullSubtitle.slice(0, ++i);
+        if (i >= fullSubtitle.length && typingTimer) clearInterval(typingTimer);
+    }, 55);
+});
+
+onUnmounted(() => {
+    if (typingTimer) clearInterval(typingTimer);
+});
 </script>
 
 <style scoped>
@@ -42,6 +64,13 @@ const yearsOfExperience = useYearsOfExperience();
     font-size: 0.8rem;
     color: var(--darker-light-gray);
     letter-spacing: 1px;
+    min-height: calc(1em + 40px); /* no layout shift while typing */
+}
+
+.typing-caret::after {
+    content: '_';
+    color: var(--accent);
+    animation: caretBlink 1s steps(1) infinite;
 }
 
 .title {
