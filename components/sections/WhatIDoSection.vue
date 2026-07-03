@@ -30,7 +30,7 @@
 const skills = [
     {
         command: 'leadership',
-        output: 'Leading an engineering team at EnergySage — mentoring, planning, code reviews, and helping smaller companies across the Schneider Electric world work together.',
+        output: 'Leading engineering teams — mentoring, planning, code reviews, and helping teams across companies collaborate and deliver together.',
     },
     {
         command: 'backend',
