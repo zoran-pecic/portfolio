@@ -43,6 +43,7 @@ const techItems = [
     min-height: 200px;
     background-color: var(--darker-light-gray);
     display: grid;
+    grid-template-columns: 100%; /* pin the track so the auto-fill grid can't overflow */
     place-items: center;
     padding: 40px 10%;
 }

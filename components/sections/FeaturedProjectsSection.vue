@@ -32,7 +32,7 @@
                 <a href="https://qr-code.pecic.dev/"
                    target="_blank"
                    rel="noopener noreferrer"
-                   class="project-link"
+                   class="project-link link-underline"
                    aria-label="View QR Code Generator project (opens in new tab)">View Project</a>
 
             </div>

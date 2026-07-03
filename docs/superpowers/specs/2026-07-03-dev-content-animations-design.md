@@ -17,9 +17,12 @@ cards below it — **no external links** (closed-source client work):
 
 | Project | Company | One-liner | Tags |
 |---|---|---|---|
+| Green Energy Marketplace | EnergySage / Schneider Electric | Marketplace for solar, inverters, batteries, EV chargers; decoupling the monolith into services (equipment, quoting, messaging, campaigns, onboarding) | Python, Django, Vue, AWS |
+| Starzone | Mindnow / Holycode | Event ticketing platform for the biggest Swiss mobile provider | Python, E-commerce, GCP |
+| Ash | Mindnow / Holycode | E-commerce platform for meat products in Germany | Python, Celery, Integrations |
+| Thömus — Bikes of Switzerland | Mindnow / Holycode | Online bike configurator with Mollie/PayPal payment integrations | Python, Payments, Configurator |
+| Auction Platform | Mindnow / Holycode | Real-estate auction platform for apartments in Italy | Python, Docker, CI/CD |
 | Gernix | Mapp / Miticon | Marketing platform for triggering campaigns across mobile and other devices | Angular, Dashboards, Data Viz |
-| Ash | Mindnow / Holycode | E-commerce platform for meat products in Germany | Python, E-commerce, Integrations |
-| Auction Platform | Mindnow / Holycode | Real-estate auction platform for apartments in Italy | Python, Celery, CI/CD |
 
 Card = title, company, one-liner, tags. Reuses existing `.tag` style and
 `stagger-fade` scroll reveal. New component: `components/sections/WorkHighlightsSection.vue`.
