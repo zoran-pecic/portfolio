@@ -22,7 +22,7 @@
 <script setup lang="ts">
 const projects = [
     {
-        title: 'Green Energy Marketplace',
+        title: 'EnergySage',
         company: 'EnergySage / Schneider Electric',
         description: 'Marketplace for solar panels, inverters, batteries and EV chargers. Decoupling the monolith into services: equipment, quoting, messaging, campaigns, onboarding.',
         tags: ['Django', 'FastAPI', 'Vue', 'Nuxt', 'AWS'],
