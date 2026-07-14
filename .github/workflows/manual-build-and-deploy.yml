@@ -1,4 +1,4 @@
-name: Manual Nuxt 3 SSG Build and Deploy
+name: Manual Nuxt SSG Build and Deploy
 
 on:
   workflow_dispatch:
@@ -14,7 +14,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
 
       - name: Install Dependencies
         run: npm install
