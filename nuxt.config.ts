@@ -56,6 +56,6 @@ export default defineNuxtConfig({
     { path: '~/components/sections', prefix: ''},
     { path: '~/components/utils', prefix: ''}
   ],
-  compatibilityDate: '2024-11-01',
+  compatibilityDate: '2025-07-15',
   devtools: { enabled: true }
 })
