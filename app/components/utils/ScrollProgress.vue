@@ -33,7 +33,8 @@ onUnmounted(() => {
     left: 0;
     right: 0;
     height: 2px;
-    background-color: var(--accent);
+    /* mid-gray: stays visible over both dark hero and white sections (header scrolls away) */
+    background-color: var(--darker-light-gray);
     transform-origin: 0 0;
     transform: scaleX(0);
     z-index: 999; /* below the mobile menu overlay (1000) */

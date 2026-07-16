@@ -106,8 +106,14 @@ onUnmounted(() => {
 <style scoped>
 
 .header {
+    /* Overlays the hero so its mesh background runs to the top of the page — no cutoff bar */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
     grid-template-columns: 1fr 1fr;
-    background-color: var(--primary-dark-gray);
+    background: transparent;
     padding: var(--global-padding);
     padding-top: 10px;
     padding-bottom: 10px;
