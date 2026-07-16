@@ -1,3 +1,7 @@
+// Evaluated at build time — meta refreshes on each deploy.
+// Keep the start year in sync with app/composables/useYearsOfExperience.ts
+const yearsOfExperience = new Date().getFullYear() - 2017;
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   nitro: {
@@ -16,15 +20,15 @@ export default defineNuxtConfig({
         { rel: 'canonical', href: 'https://zoran.pecic.dev' },
       ],
       meta: [
-        { name: 'description', content: 'Portfolio of Zoran Pecic — Team Lead and Full-Stack Engineer with 8+ years of experience building scalable platforms with Python, Django, Vue.js, and more.' },
+        { name: 'description', content: `Portfolio of Zoran Pecic — Team Lead and Full-Stack Engineer with ${yearsOfExperience}+ years of experience building scalable platforms with Python, Django, Vue.js, and more.` },
         { property: 'og:title', content: 'Zoran Pecic - Team Lead & Full-Stack Engineer' },
-        { property: 'og:description', content: 'Portfolio of Zoran Pecic — Team Lead and Full-Stack Engineer with 8+ years of experience.' },
+        { property: 'og:description', content: `Portfolio of Zoran Pecic — Team Lead and Full-Stack Engineer with ${yearsOfExperience}+ years of experience.` },
         { property: 'og:type', content: 'website' },
         { property: 'og:url', content: 'https://zoran.pecic.dev' },
         { property: 'og:image', content: 'https://zoran.pecic.dev/images/kujzo.webp' },
         { name: 'twitter:card', content: 'summary' },
         { name: 'twitter:title', content: 'Zoran Pecic - Team Lead & Full-Stack Engineer' },
-        { name: 'twitter:description', content: 'Portfolio of Zoran Pecic — Team Lead and Full-Stack Engineer with 8+ years of experience.' },
+        { name: 'twitter:description', content: `Portfolio of Zoran Pecic — Team Lead and Full-Stack Engineer with ${yearsOfExperience}+ years of experience.` },
         { name: 'twitter:image', content: 'https://zoran.pecic.dev/images/kujzo.webp' },
       ],
       script: [
