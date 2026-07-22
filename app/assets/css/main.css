@@ -175,44 +175,51 @@ p, a {
 
 /* Animation utility classes */
 
+/* Hidden states are scoped under html.js-animate, added by useScrollAnimation()
+   post-hydration — served HTML stays fully visible for crawlers and no-JS users. */
 .animate-on-scroll {
-    opacity: 0;
-    transform: translateY(30px);
     transition: opacity var(--animation-duration-normal) var(--animation-easing),
                 transform var(--animation-duration-normal) var(--animation-easing);
 }
 
-.animate-on-scroll.is-visible {
+.js-animate .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.js-animate .animate-on-scroll.is-visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-.slide-from-left {
+.slide-from-left,
+.slide-from-right {
+    transition: opacity var(--animation-duration-normal) var(--animation-easing),
+                transform var(--animation-duration-normal) var(--animation-easing);
+}
+
+.js-animate .slide-from-left {
     opacity: 0;
     transform: translateX(-40px);
-    transition: opacity var(--animation-duration-normal) var(--animation-easing),
-                transform var(--animation-duration-normal) var(--animation-easing);
 }
 
-.slide-from-right {
+.js-animate .slide-from-right {
     opacity: 0;
     transform: translateX(40px);
-    transition: opacity var(--animation-duration-normal) var(--animation-easing),
-                transform var(--animation-duration-normal) var(--animation-easing);
 }
 
-.slide-from-left.is-visible,
-.slide-from-right.is-visible {
+.js-animate .slide-from-left.is-visible,
+.js-animate .slide-from-right.is-visible {
     opacity: 1;
     transform: translateX(0);
 }
 
-.stagger-children > * {
+.js-animate .stagger-children > * {
     opacity: 0;
     transform: scale(0.6) translateY(20px);
 }
 
-.stagger-children.is-visible > * {
+.js-animate .stagger-children.is-visible > * {
     animation: techPopIn 0.5s var(--animation-easing) forwards;
 }
 
@@ -234,10 +241,13 @@ p, a {
 
 /* Stagger for timeline entries (fade-in variant) */
 .stagger-fade > * {
-    opacity: 0;
-    transform: translateY(20px);
     transition: opacity var(--animation-duration-normal) var(--animation-easing),
                 transform var(--animation-duration-normal) var(--animation-easing);
+}
+
+.js-animate .stagger-fade > * {
+    opacity: 0;
+    transform: translateY(20px);
 }
 
 /* Fallback for children beyond the staggered five, so long lists still reveal */

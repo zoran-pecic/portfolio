@@ -4,6 +4,13 @@ export function useScrollAnimation() {
     let observer: IntersectionObserver | null = null;
 
     onMounted(() => {
+        // Skip entirely for reduced-motion users: content stays visible, no observer runs.
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        // Served HTML keeps content visible (SEO / no-JS); hidden states in CSS are
+        // scoped under html.js-animate, applied only here, post-hydration.
+        document.documentElement.classList.add('js-animate');
+
         observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
