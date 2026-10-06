@@ -1,114 +1,73 @@
 <template>
-    <HalfContent id="projects" class="wrapper-space">
-        <template v-slot:half1>
-            <div class="slide-from-left">
-                <img class="custom-image"
-                    src="/images/custom-images/img1.webp"
-                    alt="QR Code Generator screenshot" />
-            </div>
-        </template>
+    <section id="projects" class="section">
+        <div class="container project-grid">
+            <figure class="project-figure slide-from-left">
+                <img
+                    src="/images/projects/qr-code-generator.jpg"
+                    alt="Screenshot of the QR Code Generator web app"
+                    width="1920"
+                    height="1200"
+                    loading="lazy"
+                >
+            </figure>
 
-        <template v-slot:half2>
-            <div class="content slide-from-right">
-
-                <h2 class="unica-one-regular title">
-                    Featured Project
-                </h2>
-                <p class="description">
-                    A fully-featured QR Code Generator with a Python/FastAPI backend
-                    and Nuxt.js frontend. Supports WiFi, URL, IPS payments, and Social
-                    QR codes with full customization -- colors, shapes, and embedded logos.
-                    Designed for simplicity with a focus on clean UX and instant generation.
+            <div class="project-copy slide-from-right">
+                <h2 class="section-title">Featured project</h2>
+                <h3 class="project-name">QR Code Generator</h3>
+                <p class="project-text">
+                    A QR code generator with a FastAPI backend and a Nuxt frontend.
+                    Supports WiFi, URL, IPS payment and social-profile codes, with custom colours,
+                    shapes and embedded logos.
                 </p>
-
-                <div class="project-tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">FastAPI</span>
-                    <span class="tag">Nuxt.js</span>
-                    <span class="tag">TypeScript</span>
-                    <span class="tag">QR Generation</span>
-                </div>
-
-                <a href="https://qr-code.pecic.dev/"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="project-link link-underline"
-                   aria-label="View QR Code Generator project (opens in new tab)">View Project</a>
-
+                <p class="meta project-stack">Python, FastAPI, Nuxt, TypeScript</p>
+                <!-- Live link removed: qr-code.pecic.dev no longer resolves. Restore when redeployed. -->
             </div>
-
-        </template>
-    </HalfContent>
+        </div>
+    </section>
 </template>
 
-<script setup lang="ts">
-
-</script>
-
 <style scoped>
-
-.wrapper-space {
-    padding: 50px 0 80px 0;
+.project-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(32px, 6vw, 80px);
+    align-items: center;
 }
 
-.content {
-    padding-right: 20%;
-}
-
-.title {
-    color: var(--description-dark-title);
-    margin-bottom: 20px;
-}
-
-.description {
-    color: var(--darker-light-gray);
-    font-size: 13px;
-    line-height: 181%;
-    overflow-wrap: break-word;
-    margin-bottom: 20px;
-}
-
-.project-tags {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 24px;
-}
-
-.tag {
-    font-size: 0.7rem;
-    padding: 4px 12px;
-    border: 1px solid var(--light-gray-border);
-    border-radius: 20px;
-    color: var(--darker-light-gray);
-}
-
-.project-link {
-    overflow-wrap: break-word;
-    white-space: pre-wrap;
-    color: var(--accent-dark);
-    outline: none;
-    font-size: 14px;
-    font-weight: 400;
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.project-link:hover {
-    color: var(--description-dark-title);
-}
-
-.custom-image {
-    width: 65%;
+.project-figure img {
+    width: 100%;
     height: auto;
-    align-self: flex-end;
+    border-radius: 10px;
+    border: 1px solid var(--rule-light);
+    filter: grayscale(1);
+    transition: filter 0.4s ease;
 }
 
+.project-figure:hover img {
+    filter: grayscale(0);
+}
 
-@media only screen and (max-width: 1300px){
-    .custom-image {
-        width: 85%;
+.project-name {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--description-dark-title);
+}
+
+.project-text {
+    margin-top: 12px;
+    max-width: 44ch;
+    line-height: 1.7;
+    color: var(--description-light-gray-color);
+}
+
+.project-stack {
+    margin-top: 16px;
+}
+
+@media only screen and (max-width: 900px) {
+    .project-grid {
+        grid-template-columns: 1fr;
     }
 }
-
 </style>
