@@ -1,35 +1,31 @@
-
 <template>
-    <header class="display-grid header">
-        <a href="#home" class="logo-link" aria-label="Homepage">
-            <img src="/images/logo.svg" alt="ZP Logo" class="logo-img" />
-        </a>
+    <header class="header">
+        <div class="container header-inner">
+            <a href="#home" class="logo-link" aria-label="Homepage">
+                <img src="/images/logo.svg" alt="ZP logo" class="logo-img" width="36" height="36">
+            </a>
 
-        <nav class="display-grid nav-alignment" aria-label="Main navigation">
-            <ul class="nav-links">
-                <li v-for="link in navLinks" :key="link.href" class="nav-item">
-                    <a class="nav-link" :href="link.href">{{ link.label }}</a>
-                </li>
+            <nav class="nav" aria-label="Main navigation">
+                <ul class="nav-links">
+                    <li v-for="link in navLinks" :key="link.href">
+                        <a class="nav-link link-underline" :href="link.href">{{ link.label }}</a>
+                    </li>
+                </ul>
+                <a href="#contact" class="btn btn-outline nav-cta">Get in touch</a>
 
-                <a href="#contact" class="cta-link">
-                    <RoundButton
-                    displayText="Get in Touch"
-                    class="rounded-button"/>
-                </a>
-            </ul>
-
-            <button
-                class="hamburger-btn"
-                :aria-expanded="isMobileMenuOpen"
-                aria-controls="mobile-menu"
-                aria-label="Toggle menu"
-                @click="toggleMobileMenu"
-            >
-                <span class="hamburger-line" :class="{ 'open': isMobileMenuOpen }"></span>
-                <span class="hamburger-line" :class="{ 'open': isMobileMenuOpen }"></span>
-                <span class="hamburger-line" :class="{ 'open': isMobileMenuOpen }"></span>
-            </button>
-        </nav>
+                <button
+                    class="hamburger-btn"
+                    :aria-expanded="isMobileMenuOpen"
+                    aria-controls="mobile-menu"
+                    aria-label="Toggle menu"
+                    @click="toggleMobileMenu"
+                >
+                    <span class="hamburger-line" :class="{ 'open': isMobileMenuOpen }"></span>
+                    <span class="hamburger-line" :class="{ 'open': isMobileMenuOpen }"></span>
+                    <span class="hamburger-line" :class="{ 'open': isMobileMenuOpen }"></span>
+                </button>
+            </nav>
+        </div>
 
         <Teleport to="body">
             <Transition name="overlay">
@@ -50,8 +46,8 @@
                             @click="closeMobileMenu"
                         >{{ link.label }}</a>
 
-                        <a href="#contact" class="mobile-nav-link mobile-cta" @click="closeMobileMenu">
-                            Get in Touch
+                        <a href="#contact" class="btn btn-outline mobile-cta" @click="closeMobileMenu">
+                            Get in touch
                         </a>
                     </nav>
                 </div>
@@ -65,10 +61,10 @@ import { ref, watch, onUnmounted } from 'vue';
 import type { NavLink } from '@/types/NavLink';
 
 const navLinks: NavLink[] = [
-    { href: '#home', label: 'Home' },
     { href: '#about', label: 'About' },
     { href: '#experience', label: 'Experience' },
     { href: '#projects', label: 'Projects' },
+    { href: '#work', label: 'Work' },
 ]
 
 const isMobileMenuOpen = ref(false);
@@ -104,26 +100,26 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-
 .header {
-    /* Overlays the hero so its mesh background runs to the top of the page — no cutoff bar */
+    /* Overlays the dark hero; it scrolls away with the page */
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     z-index: 10;
-    grid-template-columns: 1fr 1fr;
-    background: transparent;
-    padding: var(--global-padding);
-    padding-top: 10px;
-    padding-bottom: 10px;
-    color: #FFFFFF;
+    color: var(--white-gray);
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
 }
 
 .logo-link {
-    display: grid;
+    display: inline-flex;
     align-items: center;
-    text-decoration: none;
 }
 
 .logo-img {
@@ -131,53 +127,29 @@ onUnmounted(() => {
     width: auto;
 }
 
-.nav-alignment {
-    justify-items: end;
+.nav {
+    display: flex;
     align-items: center;
+    gap: 28px;
 }
 
 .nav-links {
-    list-style-type: none;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(50px, 100px)) fit-content(160px);
-    place-items: center;
+    list-style: none;
+    display: flex;
+    gap: 24px;
 }
 
 .nav-link {
-    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
     color: var(--nav-links-text-color);
-    font-size: 0.8rem;
-    transition: color 0.2s ease;
+    transition: color var(--animation-duration-fast) ease;
 }
 
 .nav-link:hover {
     color: var(--white-gray);
 }
 
-.cta-link {
-    text-decoration: none;
-}
-
-.rounded-button {
-    background: transparent;
-    border: 1px solid var(--light-gray-border);
-    border-radius: 42px;
-    width: 155px;
-    min-height: 40px;
-    padding: 2px 5px 2px 5px;
-    white-space: nowrap;
-    color: var(--light-gray-text-color);
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition: border-color 0.2s ease, color 0.2s ease;
-}
-
-.rounded-button:hover {
-    border-color: var(--accent);
-    color: var(--white-gray);
-}
-
-/* Hamburger button */
 .hamburger-btn {
     display: none;
     flex-direction: column;
@@ -186,12 +158,11 @@ onUnmounted(() => {
     gap: 5px;
     background: none;
     border: 1px solid var(--light-gray-border);
-    border-radius: 8px;
-    padding: 10px;
-    cursor: pointer;
+    border-radius: 6px;
     width: 44px;
     height: 44px;
-    transition: border-color 0.2s ease;
+    cursor: pointer;
+    transition: border-color var(--animation-duration-fast) ease;
 }
 
 .hamburger-btn:hover {
@@ -218,7 +189,6 @@ onUnmounted(() => {
     transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Mobile overlay */
 .mobile-overlay {
     position: fixed;
     inset: 0;
@@ -233,15 +203,15 @@ onUnmounted(() => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 32px;
+    gap: 28px;
 }
 
 .mobile-nav-link {
-    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 1.4rem;
     color: var(--light-gray-text-color);
-    font-size: 1.3rem;
-    letter-spacing: 1px;
-    transition: color 0.2s ease;
+    text-decoration: none;
+    transition: color var(--animation-duration-fast) ease;
 }
 
 .mobile-nav-link:hover {
@@ -249,20 +219,9 @@ onUnmounted(() => {
 }
 
 .mobile-cta {
-    margin-top: 16px;
-    padding: 10px 32px;
-    border: 1px solid var(--light-gray-border);
-    border-radius: 42px;
-    font-size: 1rem;
-    transition: border-color 0.2s ease, color 0.2s ease;
+    margin-top: 12px;
 }
 
-.mobile-cta:hover {
-    border-color: var(--white-gray);
-    color: var(--white-gray);
-}
-
-/* Overlay transition */
 .overlay-enter-active,
 .overlay-leave-active {
     transition: opacity 0.3s ease;
@@ -273,8 +232,9 @@ onUnmounted(() => {
     opacity: 0;
 }
 
-@media only screen and (max-width: 1100px){
-    .nav-links {
+@media only screen and (max-width: 900px) {
+    .nav-links,
+    .nav-cta {
         display: none;
     }
 

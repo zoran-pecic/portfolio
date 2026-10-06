@@ -13,16 +13,18 @@ const progress = ref(0);
 
 function onScroll() {
     const max = document.documentElement.scrollHeight - window.innerHeight;
-    progress.value = max > 0 ? window.scrollY / max : 0;
+    progress.value = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
 }
 
 onMounted(() => {
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
     onScroll();
 });
 
 onUnmounted(() => {
     window.removeEventListener('scroll', onScroll);
+    window.removeEventListener('resize', onScroll);
 });
 </script>
 

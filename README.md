@@ -1,75 +1,25 @@
-# Nuxt Minimal Starter
+# zoran.pecic.dev
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Personal portfolio. Nuxt 4, static generation, no runtime server and no UI dependencies.
 
-## Setup
-
-Make sure to install dependencies:
+## Develop
 
 ```bash
-# npm
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
+npm run dev        # http://localhost:3000
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+## Build and deploy
 
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
+npm run generate   # static site in dist/
 ```
 
-## Production
+Deployment is manual: run the "Manual Nuxt SSG Build and Deploy" workflow in GitHub Actions. It generates the site, gzips it and copies `dist/` to the VPS.
 
-Build the application for production:
+## Where things live
 
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- `app/components/sections/` one component per page section, content inline in each
+- `app/assets/css/main.css` tokens, type, buttons and the scroll-reveal classes
+- `app/composables/useScrollAnimation.ts` IntersectionObserver that reveals `.animate-on-scroll` elements; served HTML stays visible without JS
+- `public/images/` portrait, logo, tech logos and project screenshots
