@@ -1,18 +1,23 @@
 <template>
-    <a href="#main-content" class="skip-to-content">Skip to main content</a>
-    <Header/>
-    <main id="main-content">
-        <IntroSection/>
-        <AboutSection/>
-        <WhatIDoSection/>
-        <ExperienceSection/>
-        <FeaturedProjectsSection/>
-        <WorkHighlightsSection/>
-        <TechStack/>
-    </main>
-    <Footer/>
-    <ScrollToTop/>
-    <ScrollProgress/>
+    <MotionConfig reduced-motion="user">
+        <a href="#main-content" class="skip-to-content">Skip to main content</a>
+        <Header/>
+        <main id="main-content">
+            <IntroSection/>
+            <AboutSection/>
+            <WhatIDoSection/>
+            <ExperienceSection/>
+            <FeaturedProjectsSection/>
+            <WorkHighlightsSection/>
+            <TechStack/>
+        </main>
+        <Footer/>
+        <ScrollToTop/>
+        <ScrollProgress/>
+        <ClientOnly>
+            <FontSwitcher/>
+        </ClientOnly>
+    </MotionConfig>
 </template>
 
 <script setup lang="ts">
