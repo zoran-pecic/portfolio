@@ -43,8 +43,14 @@
     transition: filter 0.4s ease;
 }
 
-.project-figure:hover img {
+/* Colour arrives as the screenshot scrolls in, so touch users see it too (hover still works) */
+.project-figure:hover img,
+.project-figure.is-visible img {
     filter: grayscale(0);
+}
+
+.project-figure.is-visible img {
+    transition: filter 1.2s ease 0.5s;
 }
 
 .project-name {

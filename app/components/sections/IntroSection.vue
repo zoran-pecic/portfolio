@@ -3,7 +3,9 @@
         <div class="container hero-inner">
             <div class="hero-copy">
                 <p class="meta hero-role hero-enter">Team Lead and Full-Stack Engineer</p>
-                <h1 class="hero-title hero-enter" style="--i: 1">Zoran Pecic</h1>
+                <h1 class="hero-title" aria-label="Zoran Pecic">
+                    <span class="hero-word" style="animation-delay: 0.15s" aria-hidden="true">Zoran</span> <span class="hero-word" style="animation-delay: 0.3s" aria-hidden="true">Pecic</span>
+                </h1>
                 <p class="hero-text hero-enter" style="--i: 2">
                     I lead a product engineering team at EnergySage and build
                     backend-heavy platforms with Python, Django, FastAPI and Vue.
