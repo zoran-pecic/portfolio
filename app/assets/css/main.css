@@ -14,6 +14,7 @@
     --rule-light: #DDDDDA;
     --accent: #E8E8E8;
     --accent-dark: #4A4A4A;
+    --meta: #6B6B69; /* 4.85:1 on --paper; --darker-light-gray was 3.1:1 */
 
     --font-sans: 'Geist', system-ui, -apple-system, sans-serif;
     --font-mono: 'Courier Prime', ui-monospace, monospace;
@@ -109,7 +110,14 @@ button {
 .meta {
     font-family: var(--font-mono);
     font-size: 0.8rem;
-    color: var(--darker-light-gray);
+    color: var(--meta);
+}
+
+/* Dark surfaces keep the lighter meta gray (5:1 on #1A1A1A) */
+.hero,
+.experience-section,
+.footer {
+    --meta: var(--darker-light-gray);
 }
 
 /* Buttons: one radius, two fills. */
@@ -228,6 +236,23 @@ button {
     }
 }
 
+/* Hero name: words rise out of a soft blur one after another (delay set inline per word) */
+.hero-word {
+    display: inline-block;
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(0.35em);
+    animation: heroWord 0.9s var(--animation-easing) forwards;
+}
+
+@keyframes heroWord {
+    to {
+        opacity: 1;
+        filter: none;
+        transform: none;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
@@ -236,10 +261,12 @@ button {
     .animate-on-scroll,
     .slide-from-left,
     .slide-from-right,
-    .hero-enter {
+    .hero-enter,
+    .hero-word {
         opacity: 1 !important;
         transform: none !important;
         transition: none !important;
         animation: none !important;
+        filter: none;
     }
 }

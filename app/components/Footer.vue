@@ -77,6 +77,9 @@ const accountsList = [
 }
 
 .footer-link {
+    display: inline-block;
+    padding-block: 8px; /* 24px+ tap target */
+    background-position: 0 calc(100% - 6px); /* keep the hover underline under the text, not the padding */
     color: var(--light-gray-text-color);
 }
 

@@ -1,23 +1,39 @@
 <template>
-    <header class="header">
+    <header class="header" :class="{ 'is-fixed': isFixed }">
         <div class="container header-inner">
             <a href="#home" class="logo-link" aria-label="Homepage">
                 <img src="/images/logo.svg" alt="ZP logo" class="logo-img" width="36" height="36">
             </a>
 
             <nav class="nav" aria-label="Main navigation">
-                <ul class="nav-links">
+                <ul class="nav-links" @mouseleave="hovered = null" @focusout="hovered = null">
                     <li v-for="link in navLinks" :key="link.href">
-                        <a class="nav-link link-underline" :href="link.href">{{ link.label }}</a>
+                        <a
+                            class="nav-link"
+                            :class="{ 'is-active': activeHref === link.href }"
+                            :href="link.href"
+                            :aria-current="activeHref === link.href ? 'location' : undefined"
+                            @mouseenter="hovered = link.href"
+                            @focus="hovered = link.href"
+                        >
+                            {{ link.label }}
+                            <Motion
+                                v-if="(hovered ?? activeHref) === link.href"
+                                layout-id="nav-indicator"
+                                class="nav-indicator"
+                                :transition="{ type: 'spring', stiffness: 380, damping: 34 }"
+                            />
+                        </a>
                     </li>
                 </ul>
                 <a href="#contact" class="btn btn-outline nav-cta">Get in touch</a>
 
                 <button
+                    ref="menuButton"
                     class="hamburger-btn"
                     :aria-expanded="isMobileMenuOpen"
                     aria-controls="mobile-menu"
-                    aria-label="Toggle menu"
+                    :aria-label="isMobileMenuOpen ? 'Close menu' : 'Open menu'"
                     @click="toggleMobileMenu"
                 >
                     <span class="hamburger-line" :class="{ 'open': isMobileMenuOpen }"></span>
@@ -32,10 +48,12 @@
                 <div
                     v-if="isMobileMenuOpen"
                     id="mobile-menu"
+                    ref="mobileMenu"
                     class="mobile-overlay"
                     role="dialog"
+                    aria-modal="true"
                     aria-label="Mobile navigation"
-                    @click.self="closeMobileMenu"
+                    @click.self="closeMobileMenu()"
                 >
                     <nav class="mobile-nav">
                         <a
@@ -43,10 +61,10 @@
                             :key="link.href"
                             :href="link.href"
                             class="mobile-nav-link"
-                            @click="closeMobileMenu"
+                            @click="closeMobileMenu(false)"
                         >{{ link.label }}</a>
 
-                        <a href="#contact" class="btn btn-outline mobile-cta" @click="closeMobileMenu">
+                        <a href="#contact" class="btn btn-outline mobile-cta" @click="closeMobileMenu(false)">
                             Get in touch
                         </a>
                     </nav>
@@ -57,7 +75,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onUnmounted } from 'vue';
+import { ref, watch, nextTick, onMounted, onUnmounted } from 'vue';
 import type { NavLink } from '@/types/NavLink';
 
 const navLinks: NavLink[] = [
@@ -68,13 +86,22 @@ const navLinks: NavLink[] = [
 ]
 
 const isMobileMenuOpen = ref(false);
+const isFixed = ref(false);
+const hovered = ref<string | null>(null);
+const activeHref = ref<string | null>(null);
+const menuButton = ref<HTMLButtonElement>();
+const mobileMenu = ref<HTMLElement>();
+let sectionObserver: IntersectionObserver | null = null;
 
 function toggleMobileMenu() {
-    isMobileMenuOpen.value = !isMobileMenuOpen.value;
+    if (isMobileMenuOpen.value) closeMobileMenu();
+    else isMobileMenuOpen.value = true;
 }
 
-function closeMobileMenu() {
+/** Closes the overlay; returns focus to the toggle unless a nav link is taking the user elsewhere. */
+function closeMobileMenu(restoreFocus = true) {
     isMobileMenuOpen.value = false;
+    if (restoreFocus) nextTick(() => menuButton.value?.focus());
 }
 
 function onKeydown(e: KeyboardEvent) {
@@ -83,17 +110,45 @@ function onKeydown(e: KeyboardEvent) {
     }
 }
 
-watch(isMobileMenuOpen, (isOpen) => {
+/** Pins the header once the hero has scrolled out of view. */
+function onScroll() {
+    isFixed.value = window.scrollY > window.innerHeight * 0.8;
+}
+
+watch(isMobileMenuOpen, async (isOpen) => {
+    // The overlay is teleported outside #__nuxt, so making the app inert keeps Tab inside the dialog.
+    document.getElementById('__nuxt')?.toggleAttribute('inert', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
     if (isOpen) {
-        document.body.style.overflow = 'hidden';
         document.addEventListener('keydown', onKeydown);
+        await nextTick();
+        mobileMenu.value?.querySelector<HTMLElement>('a')?.focus();
     } else {
-        document.body.style.overflow = '';
         document.removeEventListener('keydown', onKeydown);
     }
 });
 
+onMounted(() => {
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    sectionObserver = new IntersectionObserver(
+        (entries) => {
+            const hit = entries.find((entry) => entry.isIntersecting);
+            if (hit) activeHref.value = `#${hit.target.id}`;
+        },
+        { rootMargin: '-40% 0px -55% 0px' }
+    );
+    ['home', ...navLinks.map((link) => link.href.slice(1))].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) sectionObserver?.observe(el);
+    });
+});
+
 onUnmounted(() => {
+    window.removeEventListener('scroll', onScroll);
+    sectionObserver?.disconnect();
+    document.getElementById('__nuxt')?.removeAttribute('inert');
     document.body.style.overflow = '';
     document.removeEventListener('keydown', onKeydown);
 });
@@ -101,7 +156,7 @@ onUnmounted(() => {
 
 <style scoped>
 .header {
-    /* Overlays the dark hero; it scrolls away with the page */
+    /* Overlays the dark hero; pinned (.is-fixed) once the hero scrolls out of view */
     position: absolute;
     top: 0;
     left: 0;
@@ -110,11 +165,30 @@ onUnmounted(() => {
     color: var(--white-gray);
 }
 
+.header.is-fixed {
+    position: fixed;
+    z-index: 50;
+    background-color: rgba(34, 34, 34, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--light-gray-border);
+    animation: headerDrop 0.35s var(--animation-easing);
+}
+
+@keyframes headerDrop {
+    from {
+        transform: translateY(-100%);
+    }
+}
+
 .header-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 72px;
+}
+
+.is-fixed .header-inner {
+    height: 60px;
 }
 
 .logo-link {
@@ -140,14 +214,28 @@ onUnmounted(() => {
 }
 
 .nav-link {
+    position: relative;
+    display: inline-block;
+    padding-block: 6px;
     font-family: var(--font-mono);
     font-size: 0.9rem;
+    text-decoration: none;
     color: var(--nav-links-text-color);
     transition: color var(--animation-duration-fast) ease;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link.is-active {
     color: var(--white-gray);
+}
+
+.nav-indicator {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background-color: currentColor;
 }
 
 .hamburger-btn {
@@ -230,6 +318,12 @@ onUnmounted(() => {
 .overlay-enter-from,
 .overlay-leave-to {
     opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .header.is-fixed {
+        animation: none;
+    }
 }
 
 @media only screen and (max-width: 900px) {

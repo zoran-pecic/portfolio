@@ -63,6 +63,7 @@ export default defineNuxtConfig({
       ],
     },
   },
+  modules: ['motion-v/nuxt'],
   css: ['~/assets/css/main.css'],
   components: [
     { path: '~/components', prefix: ''},
